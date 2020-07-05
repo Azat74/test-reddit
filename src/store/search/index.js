@@ -7,6 +7,7 @@ export const searchSlice = createSlice({
     beforeID: '',
     afterID: '',
     queryName: '',
+    firstItemID: '',
   },
   reducers: {
     search: () => {},
@@ -51,6 +52,14 @@ export const searchSlice = createSlice({
         afterID,
       }
     },
+    setFirstItemID: (state, action) => {
+      const { firstItemID } = action.payload
+
+      return {
+        ...state,
+        firstItemID,
+      }
+    },
   },
 })
 
@@ -62,11 +71,14 @@ export const {
   setBeforeID,
   setAfterID,
   setQuery,
+  setFirstItemID,
 } = searchSlice.actions
 
 export const selectPosts = (state) => state.search.posts
 export const selectBeforeID = (state) => state.search.beforeID
 export const selectAfterID = (state) => state.search.afterID
+export const selectBeforeIsActive = (state) =>
+  state.search.beforeID !== state.search.firstItemID
 export const selectQuery = (state) => state.search.queryName
 
 export default searchSlice.reducer

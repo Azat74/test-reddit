@@ -4,13 +4,13 @@ import { Button } from 'reactstrap'
 import classnames from 'classnames/bind'
 
 import css from './Pagination.module.css'
-import { selectBeforeID, selectAfterID, search } from '../../store/search'
+import { selectBeforeIsActive, selectAfterID, search } from '../../store/search'
 
 const cn = classnames.bind(css)
 
 export const Pagination = () => {
   const dispatch = useDispatch()
-  const prevSelector = useSelector(selectBeforeID)
+  const prevSelector = useSelector(selectBeforeIsActive)
   const nextSelector = useSelector(selectAfterID)
 
   return (

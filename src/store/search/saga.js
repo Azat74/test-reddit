@@ -8,6 +8,7 @@ import {
   selectQuery,
   selectBeforeID,
   selectAfterID,
+  setFirstItemID,
 } from './index'
 import { formatDate } from '../../helpers/index'
 
@@ -29,10 +30,12 @@ function* handleSearch(action) {
   const axios = yield getContext('axios')
   let prevArg = ''
   let nextArg = ''
+  let limit = 10
 
   const { queryName, isPrev, isNext } = action.payload
 
   if (queryName) {
+    limit = 8
     yield put(
       setQuery({
         queryName,
@@ -53,10 +56,18 @@ function* handleSearch(action) {
 
   try {
     const response = yield axios.get(
-      `r/${currentQueryName}/hot.json?limit=10${prevArg}${nextArg}`,
+      `r/${currentQueryName}/hot.json?limit=${limit}${prevArg}${nextArg}`,
     )
 
     const { children } = response.data.data
+
+    if (queryName) {
+      yield put(
+        setFirstItemID({
+          firstItemID: children[0].data.name ? children[0].data.name : '',
+        }),
+      )
+    }
 
     yield put(
       setBeforeID({

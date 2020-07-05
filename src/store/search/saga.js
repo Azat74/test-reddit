@@ -1,7 +1,8 @@
 import { all, takeEvery, put, getContext, select } from 'redux-saga/effects'
 import {
-  search,
-  setPosts,
+  sendQuery,
+  sendQuerySuccess,
+  sendQueryFailed,
   setBeforeID,
   setAfterID,
   setQuery,
@@ -105,12 +106,12 @@ function* handleSearch(action) {
       author_fullname: authors[item.author_fullname].name,
     }))
 
-    yield put(setPosts({ posts: postsWithAuthorNormalized }))
+    yield put(sendQuerySuccess({ posts: postsWithAuthorNormalized }))
   } catch (e) {
-    console.error(e)
+    yield put(sendQueryFailed())
   }
 }
 
 export default function* () {
-  return yield all([takeEvery(search, handleSearch)])
+  return yield all([takeEvery(sendQuery, handleSearch)])
 }

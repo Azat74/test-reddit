@@ -8,9 +8,33 @@ export const searchSlice = createSlice({
     afterID: '',
     queryName: '',
     firstItemID: '',
+    isLock: false,
+    error: '',
   },
   reducers: {
-    search: () => {},
+    sendQuery: (state) => {
+      return {
+        ...state,
+        error: '',
+        isLock: true,
+      }
+    },
+    sendQuerySuccess: (state, action) => {
+      const { posts } = action.payload
+
+      return {
+        ...state,
+        isLock: false,
+        posts,
+      }
+    },
+    sendQueryFailed: (state) => {
+      return {
+        ...state,
+        isLock: false,
+        error: 'Неправильный запрос',
+      }
+    },
     setQuery: (state, action) => {
       const { queryName } = action.payload
 
@@ -19,23 +43,6 @@ export const searchSlice = createSlice({
         queryName,
       }
     },
-    setPosts: (state, action) => {
-      const { posts } = action.payload
-
-      return {
-        ...state,
-        posts,
-      }
-    },
-    setError: (state, action) => {
-      const { error } = action.payload
-
-      return {
-        ...state,
-        error: error,
-      }
-    },
-    logout: () => {},
     setBeforeID: (state, action) => {
       const { beforeID } = action.payload
 
@@ -60,18 +67,23 @@ export const searchSlice = createSlice({
         firstItemID,
       }
     },
+    clearError: (state) => ({
+      ...state,
+      error: '',
+    }),
   },
 })
 
 export const {
-  search,
+  sendQuery,
   logout,
-  setPosts,
-  setError,
+  sendQuerySuccess,
+  sendQueryFailed,
   setBeforeID,
   setAfterID,
   setQuery,
   setFirstItemID,
+  clearError,
 } = searchSlice.actions
 
 export const selectPosts = (state) => state.search.posts
@@ -80,5 +92,7 @@ export const selectAfterID = (state) => state.search.afterID
 export const selectBeforeIsActive = (state) =>
   state.search.beforeID !== state.search.firstItemID
 export const selectQuery = (state) => state.search.queryName
+export const selectIsLock = (state) => state.search.isLock
+export const selectError = (state) => state.search.error
 
 export default searchSlice.reducer

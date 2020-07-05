@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'reactstrap'
 import classnames from 'classnames/bind'
 import css from './Pagination.module.css'
-import { selectBeforeID, selectAfterID } from '../../store/search'
+import { selectBeforeID, selectAfterID, search } from '../../store/search'
 
 const cn = classnames.bind(css)
 
 export const Pagination = () => {
   const dispatch = useDispatch()
-  const prev = useSelector(selectBeforeID)
-  const next = useSelector(selectAfterID)
+  const prevSelector = useSelector(selectBeforeID)
+  const nextSelector = useSelector(selectAfterID)
 
   return (
     <div className={cn('pagination')}>
@@ -18,7 +18,8 @@ export const Pagination = () => {
         type="button"
         className={cn('button')}
         color="primary"
-        disabled={!prev}
+        disabled={!prevSelector}
+        onClick={() => dispatch(search({ isPrev: true }))}
       >
         Prev
       </Button>
@@ -26,7 +27,8 @@ export const Pagination = () => {
         type="button"
         className={cn('button')}
         color="primary"
-        disabled={!next}
+        disabled={!nextSelector}
+        onClick={() => dispatch(search({ isNext: true }))}
       >
         Next
       </Button>

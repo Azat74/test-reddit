@@ -1,20 +1,27 @@
 .results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  grid-gap: 0.5em;
   padding-top: 50px;
 }
 
 .item {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   border: 1px solid #000000;
   text-align: left;
 }
 
 .link {
+  margin-bottom: 10px;
   color: #000000;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .bottomWrapper {
+  margin-top: auto;
   display: flex;
   justify-content: center;
 }

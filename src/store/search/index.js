@@ -6,16 +6,16 @@ export const searchSlice = createSlice({
     posts: [],
     beforeID: '',
     afterID: '',
-    queryString: '',
+    queryName: '',
   },
   reducers: {
     search: () => {},
     setQuery: (state, action) => {
-      const { queryString } = action.payload
+      const { queryName } = action.payload
 
       return {
         ...state,
-        queryString,
+        queryName,
       }
     },
     setPosts: (state, action) => {
@@ -67,5 +67,6 @@ export const {
 export const selectPosts = (state) => state.search.posts
 export const selectBeforeID = (state) => state.search.beforeID
 export const selectAfterID = (state) => state.search.afterID
+export const selectQuery = (state) => state.search.queryName
 
 export default searchSlice.reducer

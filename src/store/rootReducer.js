@@ -1,7 +1,7 @@
 import counter from './counter'
-import auth from './auth'
+import search from './search'
 
 export default {
   counter,
-  auth,
+  search,
 }

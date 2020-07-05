@@ -1,0 +1,28 @@
+.results {
+  padding-top: 50px;
+}
+
+.item {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #000000;
+  text-align: left;
+}
+
+.link {
+  color: #000000;
+  font-size: 20px;
+}
+
+.bottomWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.author {
+  margin-left: auto;
+}
+
+.date {
+  margin-left: auto;
+}

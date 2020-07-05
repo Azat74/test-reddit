@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Button, Form as FormStrap, Label, Input } from 'reactstrap'
 import { search } from '../../store/search'
 
